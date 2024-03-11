@@ -24,8 +24,11 @@ class Post(models.Model):
         related_name='posts'
     )
 
+    class Meta:
+        ordering = ('pub_date',)
+
     def __str__(self):
-        return self.text
+        return self.text[:20]
 
 
 class Comment(models.Model):
@@ -50,3 +53,14 @@ class Follow(models.Model):
         on_delete=models.CASCADE,
         related_name='following'
     )
+
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                fields=('following', 'user'),
+                name='unique_following'
+            )
+        )
+
+    def __str__(self):
+        return f'{self.user} подписан на {self.following}!'
