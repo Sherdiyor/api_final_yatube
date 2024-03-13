@@ -66,3 +66,5 @@ python3 manage.py runserver
     "group": "1",
 }
 ```
+
+# Автор: Sherdiyor
